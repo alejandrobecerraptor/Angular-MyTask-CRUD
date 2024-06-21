@@ -1,0 +1,125 @@
+<section class="taskList-container">
+  <div class="taskList-container-content">
+    <section class="taskList-container-content__headerTable">
+      <span class="taskList-container-content__headerTable__title">
+        <i class="fa-solid fa-list fa-xl" style="color: #13806a"></i>
+        <h3 class="roboto-bold">Lista de tareas</h3>
+      </span>
+      <div class="taskList-container-content__headerTable__search">
+        <input
+          type="text"
+          placeholder="Buscar…"
+          [formControl]="searchInput"
+          (input)="searchTask()"
+        />
+        <span class="taskList-container-content__headerTable__search__icon">
+          <i
+            class="fa-solid fa-magnifying-glass fa-flip-horizontal fa-xl"
+            style="color: #27dac5"
+          ></i>
+        </span>
+      </div>
+    </section>
+
+    <section class="taskList-container-content__table">
+      <table summary="La lista de tareas personales">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Mis Tareas</th>
+            <th scope="col">Completada</th>
+            <th scope="col">Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of pagedTasks">
+            <th scope="row" class="roboto-regular">{{ task.id }}</th>
+            <td
+              [ngStyle]="{
+                'text-decoration': task.state ? 'line-through' : 'none'
+              }"
+            >
+              {{ task.title }}
+            </td>
+            <td>
+              <span class="newTask-container__content__addTask__inputCheckbox">
+                <input
+                  class="newTask-container__content__addTask__inputCheckbox__check"
+                  type="checkbox"
+                  [checked]="task.state"
+                  (click)="updateTask(task)"
+                />
+              </span>
+            </td>
+            <td>
+              <i
+                class="fa-solid fa-trash fa-lg iconTrash"
+                style="color: #ff0000"
+                (click)="deleteTask(task.id)"
+              ></i>
+            </td>
+          </tr>
+          <!-- <tr>
+            <th scope="row" class="roboto-regular">1</th>
+            <td>
+              laboriosam mollitia et enim quasi adipisci quia provident illum
+            </td>
+            <td>
+              <span class="newTask-container__content__addTask__inputCheckbox">
+                <input
+                  class="newTask-container__content__addTask__inputCheckbox__check"
+                  type="checkbox"
+                />
+              </span>
+            </td>
+            <td>
+              <i class="fa-solid fa-trash fa-lg iconTrash" style="color: #ff0000"></i>
+            </td>
+          </tr> -->
+          <!-- <tr>
+            <th scope="row">The Clash</th>
+            <td>1976</td>
+            <td>6</td>
+            <td>London Calling</td>
+          </tr> -->
+        </tbody>
+        <!-- <tfoot>
+          <tr>
+            <th scope="row" colspan="2">Número total de álbumes</th>
+            <td colspan="2">77</td>
+          </tr>
+        </tfoot> -->
+      </table>
+      <div class="pagination">
+        <button [disabled]="currentPage === 1" (click)="setPage(currentPage - 1)">Anterior</button>
+        <span>Página {{ currentPage }}</span>
+        <button [disabled]="(currentPage * itemsPerPage) >= filteredTasks.length" (click)="setPage(currentPage + 1)">Siguiente</button>
+      </div>
+      <!-- <div class="pagination">
+        <button [disabled]="currentPage === 1" (click)="prevPage()">Anterior</button>
+        <span>Página {{ currentPage }}</span>
+        <button [disabled]="(currentPage * itemsPerPage) >= tasks.length" (click)="nextPage()">Siguiente</button>
+      </div> -->
+
+      <!-- <span class="taskList-container-content__table__headerList">
+        <h3>Id</h3>
+        <h3>Mis Tareas</h3>
+        <h3>Completada</h3>
+        <h3>Borrar</h3>
+      </span>
+      <ol>
+        <li>
+          <span>1</span>
+          <p>Alejandro</p>
+          <p>Becerra</p>
+          <span>
+            <input type="checkbox" name="" id="" />
+          </span>
+          <span>
+            <i class="fa-solid fa-trash fa-xl" style="color: #ff0000"></i>
+          </span>
+        </li>
+      </ol> -->
+    </section>
+  </div>
+</section>

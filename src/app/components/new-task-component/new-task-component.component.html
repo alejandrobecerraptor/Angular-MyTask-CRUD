@@ -1,0 +1,38 @@
+<section class="newTask-container">
+  <div class="newTask-container__content">
+    <span class="newTask-container__content__titleSection">
+      <i class="fa-solid fa-plus fa-lg" style="color: #ffffff"></i>
+      <h3 class="newTask-container__content__txt roboto-bold">Nueva tarea</h3>
+    </span>
+    <div class="newTask-container__content__addTask">
+      <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+        <span class="newTask-container__content__addTask__inputTitle">
+          <label class="roboto-regular">Titulo</label>
+          <input
+            class="newTask-container__content__addTask__inputTitle__input roboto-regular"
+            formControlName="title"
+            type="text"
+            placeholder="Ingrese título…"
+          />
+        </span>
+        <span class="newTask-container__content__addTask__inputCheckbox">
+          <p class="roboto-regular">Tarea completada</p>
+          <input
+            formControlName="state"
+            class="newTask-container__content__addTask__inputCheckbox__check"
+            type="checkbox"
+          />
+        </span>
+        <button
+          class="newTask-container__content__addTask__buttonAddTask"
+          type="submit"
+        >
+          <span class="">
+            <i class="fa-solid fa-plus fa-lg" style="color: #000000"></i>
+            <h3 class="roboto-medium">Guardar tarea</h3>
+          </span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

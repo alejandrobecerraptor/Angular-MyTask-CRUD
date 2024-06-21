@@ -1,0 +1,12 @@
+.headerLogo {
+  border: 1px solid red;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__imgLogo {
+    width: 199px;
+height: 36px;
+  }
+}
