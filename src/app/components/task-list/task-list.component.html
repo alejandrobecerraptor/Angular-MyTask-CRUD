@@ -42,9 +42,8 @@
               {{ task.title }}
             </td>
             <td>
-              <span class="newTask-container__content__addTask__inputCheckbox">
+              <span>
                 <input
-                  class="newTask-container__content__addTask__inputCheckbox__check"
                   type="checkbox"
                   [checked]="task.state"
                   (click)="updateTask(task)"
@@ -59,67 +58,41 @@
               ></i>
             </td>
           </tr>
-          <!-- <tr>
-            <th scope="row" class="roboto-regular">1</th>
-            <td>
-              laboriosam mollitia et enim quasi adipisci quia provident illum
-            </td>
-            <td>
-              <span class="newTask-container__content__addTask__inputCheckbox">
-                <input
-                  class="newTask-container__content__addTask__inputCheckbox__check"
-                  type="checkbox"
-                />
-              </span>
-            </td>
-            <td>
-              <i class="fa-solid fa-trash fa-lg iconTrash" style="color: #ff0000"></i>
-            </td>
-          </tr> -->
-          <!-- <tr>
-            <th scope="row">The Clash</th>
-            <td>1976</td>
-            <td>6</td>
-            <td>London Calling</td>
-          </tr> -->
         </tbody>
-        <!-- <tfoot>
-          <tr>
-            <th scope="row" colspan="2">Número total de álbumes</th>
-            <td colspan="2">77</td>
-          </tr>
-        </tfoot> -->
       </table>
-      <div class="pagination">
-        <button [disabled]="currentPage === 1" (click)="setPage(currentPage - 1)">Anterior</button>
-        <span>Página {{ currentPage }}</span>
-        <button [disabled]="(currentPage * itemsPerPage) >= filteredTasks.length" (click)="setPage(currentPage + 1)">Siguiente</button>
-      </div>
-      <!-- <div class="pagination">
-        <button [disabled]="currentPage === 1" (click)="prevPage()">Anterior</button>
-        <span>Página {{ currentPage }}</span>
-        <button [disabled]="(currentPage * itemsPerPage) >= tasks.length" (click)="nextPage()">Siguiente</button>
-      </div> -->
-
-      <!-- <span class="taskList-container-content__table__headerList">
-        <h3>Id</h3>
-        <h3>Mis Tareas</h3>
-        <h3>Completada</h3>
-        <h3>Borrar</h3>
-      </span>
-      <ol>
-        <li>
-          <span>1</span>
-          <p>Alejandro</p>
-          <p>Becerra</p>
-          <span>
-            <input type="checkbox" name="" id="" />
-          </span>
-          <span>
-            <i class="fa-solid fa-trash fa-xl" style="color: #ff0000"></i>
-          </span>
-        </li>
-      </ol> -->
     </section>
+    <div class="taskList-container-content__pagination">
+      <i
+        class="fa-solid fa-chevron-left fa-xl iconPagination"
+        [ngStyle]="{
+          color: currentPage === 1 ? '#D0D0D0' : '#3DB0E3'
+        }"
+        (click)="currentPage === 1 ? undefined : setPage(currentPage - 1)"
+      ></i>
+      <div class="prueba">
+        <span
+          *ngFor="let i of [].constructor(totalPages); let index = index"
+          [ngClass]="index + 1 === currentPage ? 'activo' : 'inactivo'"
+          class="taskList-container-content__pagination__iconPages roboto-bold"
+          (click)="setPage(index + 1)"
+        >
+          {{ index + 1 }}
+        </span>
+      </div>
+      <i
+        class="fa-solid fa-chevron-right fa-xl iconPagination"
+        [ngStyle]="{
+          color:
+            currentPage * itemsPerPage >= filteredTasks.length
+              ? '#D0D0D0'
+              : '#3DB0E3'
+        }"
+        (click)="
+          currentPage * itemsPerPage >= tasks.length
+            ? undefined
+            : setPage(currentPage + 1)
+        "
+      ></i>
+    </div>
   </div>
 </section>

@@ -1,5 +1,4 @@
 .headerLogo {
-  border: 1px solid red;
   height: 90px;
   display: flex;
   justify-content: center;
@@ -7,6 +6,44 @@
 
   &__imgLogo {
     width: 199px;
-height: 36px;
+    height: 36px;
+  }
+}
+
+.githubLogo {
+  position: absolute;
+  right: 15%;
+  bottom: 10%;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+
+  @media (max-width: 1700px) {
+    right: 10%;
+    bottom: -30%;
+  }
+
+  @media (max-width: 1000px) {
+    right: 10%;
+    bottom: -30%;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__imgLogo {
+    width: 56px;
+    height: 56px;
+  }
+  &__txt {
+    margin: 0px;
+    font-size: 14px;
+    letter-spacing: 0.39px;
+    color: #00000099;
+    opacity: 1;
   }
 }

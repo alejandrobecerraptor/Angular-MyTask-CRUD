@@ -17,21 +17,23 @@ export class TaskListComponent implements OnInit {
 
   public currentPage = 1;
   public itemsPerPage = 5; // Número de elementos por página
+  public totalPages = 0; // Número total de páginas
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.taskService.getTask().subscribe((tasks) => {
-      // this.tasks = tasks;
       this.tasks = tasks.reverse();
       this.filteredTasks = [...this.tasks];
+      this.updateTotalPages();
       this.setPage(1);
+      console.log('totalpagees', this.totalPages);
     });
 
     this.taskService.taskCreated$.subscribe((newTask: Task) => {
       this.tasks.push(newTask);
-      // this.filteredTasks.push(newTask);
       this.filteredTasks.unshift(newTask);
+      this.updateTotalPages();
       this.setPage(1);
     });
   }
@@ -59,6 +61,10 @@ export class TaskListComponent implements OnInit {
     }
   }
 
+  updateTotalPages(): void {
+    this.totalPages = Math.ceil(this.filteredTasks.length / this.itemsPerPage);
+  }
+
   //------------------------
 
   searchTask2() {
@@ -75,12 +81,14 @@ export class TaskListComponent implements OnInit {
     this.filteredTasks = this.tasks.filter((task) =>
       task.title.toLowerCase().includes(value)
     );
+    this.updateTotalPages();
     this.setPage(1); // Actualiza la paginación después de la búsqueda
   }
 
   deleteTask(id: string): void {
     this.taskService.deleteTask(id).subscribe(() => {
       this.filteredTasks = this.filteredTasks.filter((task) => task.id !== id);
+      this.updateTotalPages();
       this.setPage(this.currentPage);
     });
   }
